@@ -1,0 +1,98 @@
+<Window x:Class="Ex01.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ex01"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="221.739" Width="230.857">
+    <Grid Margin="-9,0,12,2">
+        <TextBlock HorizontalAlignment="Left" Margin="31,104,0,0" TextWrapping="Wrap" Text="Velocidade - Km/h" VerticalAlignment="Top" Height="19" Width="114" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="1.637"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="0.471"/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="30,26,0,0" TextWrapping="Wrap" Text="Distância - Km" VerticalAlignment="Top" Height="19" Width="85"/>
+        <TextBox x:Name="DistanciaBox" HorizontalAlignment="Left" Height="23" Margin="30,45,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="76"/>
+        <TextBlock HorizontalAlignment="Left" Margin="137,26,0,0" TextWrapping="Wrap" Text="Tempo - h" VerticalAlignment="Top" Height="19" Width="76"/>
+        <TextBox x:Name="TempoBox" HorizontalAlignment="Left" Height="23" Margin="137,45,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="76" RenderTransformOrigin="0.553,0.348"/>
+        <TextBox x:Name="VelocidadeBox" HorizontalAlignment="Left" Height="23" Margin="33,128,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="180" RenderTransformOrigin="0.5,0.5">
+            <TextBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.244"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBox.RenderTransform>
+        </TextBox>
+        <Button Content="Calcula" HorizontalAlignment="Left" Margin="31,78,0,0" VerticalAlignment="Top" Width="182" Click="Button_Click"/>
+
+    </Grid>
+</Window>
+
+
+===============================================================================================================================================================================
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Ex01
+{
+    class VelocidadeMedia
+    {
+        private double distancia;
+        private double hora;
+        public void SetDistancia(double d) { distancia = d; }
+        public void SetHora(double h) { hora = h; }
+        public double GetDistancia() { return distancia; }
+        public double GetHora() { return hora; }
+        public double Calcular() { return distancia / hora; }
+
+    }
+}
+
+===============================================================================================================================================================================
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace ex1
+{
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            VelocidadeMedia vm = new VelocidadeMedia();
+            vm.SetDistancia(double.Parse(DistanciaBox.Text));
+            vm.SetHora(double.Parse(TempoBox.Text));
+            VelocidadeBox.Text = vm.Calcular().ToString();
+        }
+    }
+}
